@@ -16,7 +16,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(35000);
+            serverSocket = new ServerSocket(getPort());
         } catch (IOException e) {
             System.err.println("Could not listen on port: 35000.");
             System.exit(1);
@@ -110,7 +110,7 @@ public class Server {
                 + "<body>\n"
                 + "<h1>Calculator AREP -- PARCIAL</h1>\n"
                 + "<form action=\"/hello\">\n"
-                + "  <label for=\"operation\">Operación: (cos,sin,tan,qck)</label><br>\n"
+                + "  <label for=\"operation\">Operacion: (cos,sin,tan,qck)</label><br>\n"
                 + "  <input type=\"text\" id=\"operation\" name=\"operation\"><br><br>\n"
                 + "  <label for=\"number\">numero: (Recordar que si seleccionaste qck, debes mandar un lista de enteros)</label><br>\n"
                 + "  <input type=\"text\" id=\"number\" name=\"number\"><br><br>\n"
@@ -135,6 +135,15 @@ public class Server {
                 + "</body>\n"
                 + "</html>";
         return outputline;
+    }
+
+    public static int getPort(){
+        if(System.getenv("PORT")!=null){
+           return new Integer(System.getenv("PORT"));
+        }
+        else{
+            return 4567;
+        }
     }
 }
 

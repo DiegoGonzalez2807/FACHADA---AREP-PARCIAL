@@ -1,0 +1,1 @@
+java -cp \target\classes edu.escuelaing.arep.HttpServer.Server
