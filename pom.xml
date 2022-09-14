@@ -7,6 +7,12 @@
   <version>1.0-SNAPSHOT</version>
   <name>Fachada</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+    <project.build.outputline>UTF8</project.build.outputline>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
