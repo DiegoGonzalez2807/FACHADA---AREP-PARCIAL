@@ -1,15 +1,18 @@
 package edu.escuelaing.arep.HttpServer;
 
+import edu.escuelaing.arep.connection.HttpConnection;
+
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
 
     static String HTTP_OK_HEADER = "HTTP/1.1 200 OK\r\n"
         + "Content-Type: text/html\r\n"
          + "\r\n";
-    
-         
+
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
@@ -36,7 +39,7 @@ public class Server {
             String inputLine, resource;
             boolean flag = true;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("RecibÃ­: " + inputLine);
+                System.out.println("Recibido: " + inputLine);
                 //REVISA LA PRIMER LINEA GET /resource HTTP/1.1
                 if(flag){
                     flag = false;
@@ -57,12 +60,45 @@ public class Server {
      * Funcion encargada de revisar la primer linea y ver que recurso se esta pidiendo
      * @param resource
      */
-    public static void reviewFirstLine(String resource, PrintWriter out){
+    public static void reviewFirstLine(String resource, PrintWriter out) throws IOException {
+        HttpConnection connection = new HttpConnection();
         if(resource.contains("/calculadora")){
             out.println(HTTP_OK_HEADER+getForm());
         }
+        else if(resource.contains("val")){
+            String operation = checkOperation("resource");
+            String value = resource.split("=")[1];
+            StringBuffer valueResponse = connection.sendData(operation,value);
+            out.println(HTTP_OK_HEADER+valueResponse);
+        }
+
     }
 
+    /**
+     * Funcion generada para revisar cual es la operacion que esta especificada en el recurso
+     * @param resource
+     * @return
+     */
+    public static String checkOperation(String resource){
+        if(resource.contains("sin")){
+            return "sin";
+        }
+        else if(resource.contains("cos")){
+            return "cos";
+        }
+        else if(resource.contains("tan")){
+            return "tan";
+        }
+        else if(resource.contains("qck")){
+            return "qck";
+        }
+        return null;
+    }
+
+    /**
+     * Funcion que quema la pagina de usuario HTML + JS
+     * @return
+     */
     public static String getForm(){
         String outputline = "<!DOCTYPE html>\n"
                 + "<html>\n"

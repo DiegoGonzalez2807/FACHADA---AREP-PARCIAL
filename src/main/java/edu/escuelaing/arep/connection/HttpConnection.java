@@ -8,10 +8,9 @@ import java.net.URL;
 
 public class HttpConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String GET_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=fb&apikey=Q1QZFVJQ21K7C6XM";
 
-    public static void sendData(String path) throws IOException {
-
+    public static StringBuffer sendData(String operation, String value) throws IOException {
+        String GET_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=fb&apikey=Q1QZFVJQ21K7C6XM";
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
@@ -21,11 +20,12 @@ public class HttpConnection {
         int responseCode = con.getResponseCode();
         System.out.println("GET Response Code :: " + responseCode);
 
+        StringBuffer response = null;
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            response = new StringBuffer();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -38,5 +38,7 @@ public class HttpConnection {
             System.out.println("GET request not worked");
         }
         System.out.println("GET DONE");
+        return response;
     }
+
 }
