@@ -9,7 +9,7 @@ import java.net.URL;
 public class HttpConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    public static StringBuffer sendData(String operation, String value) throws IOException {
+    public static StringBuffer sendData(String operation, Double value) throws IOException {
         String GET_URL = "https://fathomless-harbor-09453.herokuapp.com/"+operation+"?val="+value;
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

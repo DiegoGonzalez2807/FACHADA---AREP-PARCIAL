@@ -67,7 +67,7 @@ public class Server {
         }
         else if(resource.contains("val")){
             String operation = checkOperation("resource");
-            String value = resource.split("=")[1];
+            Double value = Double.valueOf(resource.split("=")[1]);
             StringBuffer valueResponse = connection.sendData(operation,value);
             out.println(HTTP_OK_HEADER+valueResponse);
         }
