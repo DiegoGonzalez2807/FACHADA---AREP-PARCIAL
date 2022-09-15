@@ -71,6 +71,9 @@ public class Server {
             StringBuffer valueResponse = connection.sendData(operation,value);
             out.println(HTTP_OK_HEADER+valueResponse);
         }
+        else if(resource.contains("/")){
+            out.println(HTTP_OK_HEADER+getForm());
+        }
 
     }
 
