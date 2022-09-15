@@ -10,7 +10,7 @@ public class HttpConnection {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     public static StringBuffer sendData(String operation, String value) throws IOException {
-        String GET_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=fb&apikey=Q1QZFVJQ21K7C6XM";
+        String GET_URL = "https://fathomless-harbor-09453.herokuapp.com/"+operation+"?val="+value;
         URL obj = new URL(GET_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
