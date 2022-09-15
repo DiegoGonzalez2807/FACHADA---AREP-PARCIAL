@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Server {
 
-    static String HTTP_OK_HEADER = "HTTPS/1.1 200 OK\r\n"
+    static String HTTP_OK_HEADER = "HTTP/1.1 200 OK\r\n"
         + "Content-Type: text/html\r\n"
          + "\r\n";
 
